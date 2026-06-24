@@ -1,4 +1,5 @@
 #include <ADS1115.c>
+#include <LED_PWM.c>
 
 static void ads_task(void *arg)
 {
@@ -39,12 +40,10 @@ static void ads_task(void *arg)
 
         // Integer scaling for +/-6.144 V range:
         // 1 count = 0.1875 mV.
-        int32_t millivolts = ((int32_t)raw * 1875) / 10000;
+        //int32_t millivolts = ((int32_t)raw * 1875) / 10000;
 
-        ESP_LOGI(TAG, "raw=%d voltage=%ld mV", raw, (long)millivolts);
-
-        // Optional pacing. If you want max rate, remove this delay.
-        vTaskDelay(pdMS_TO_TICKS(10));
+        printf("%d\n", raw);
+        led_set_from_int16(raw);
     }
 }
 
@@ -54,6 +53,7 @@ void app_main(void)
 
     i2c_init();
     gpio_alert_init();
+    led_pwm_init();
 
     xTaskCreatePinnedToCore(
         ads_task,

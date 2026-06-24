@@ -17,7 +17,7 @@
 #define I2C_SCL_GPIO 6
 #define I2C_FREQ_HZ  100000
 
-#define ADS_ALERT_GPIO 7   // TXS A3 -> XIAO GPIO7, choose your actual GPIO
+#define ADS_ALERT_GPIO 43   // TXS A3 -> XIAO GPIO7, choose your actual GPIO
 
 #define ADS1115_ADDR       0x48
 
